@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import GuessCount from './components/GuessCount/GuessCount';
+import Card from './components/card/Card';
+import shuffle from 'lodash.shuffle';
+import HallOfFame, { FAKE_HOF } from './components/hallOfFame/HallOfFame';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const SIDE = 6;
+const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿';
+export class App extends Component {
+  cards = this.generateCards();
+
+  generateCards() {
+    const result = [];
+    const size = SIDE * SIDE;
+    const candidates = shuffle(SYMBOLS);
+    while (result.length < size) {
+      const card = candidates.pop();
+      result.push(card, card);
+    }
+    return shuffle(result);
+  }
+  handleCardClick(card) {
+    console.log(card, 'clicked');
+  }
+  render() {
+    const won = new Date().getSeconds() % 2 === 0;
+    return (
+      <div className="memory">
+        <GuessCount guesses={0} />
+        {this.cards.map((card) => (
+          <Card
+            card={card}
+            key={card}
+            feedback="visible"
+            onClick={this.handleCardClick}
+          />
+        ))}
+        {won && <HallOfFame entries={FAKE_HOF} />}
+      </div>
+    );
+  }
 }
 
 export default App;
