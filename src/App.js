@@ -28,10 +28,10 @@ export class App extends Component {
     return (
       <div className="memory">
         <GuessCount guesses={0} />
-        {this.cards.map((card) => (
+        {this.cards.map((card, index) => (
           <Card
             card={card}
-            key={card}
+            key={index}
             feedback="visible"
             onClick={this.handleCardClick}
           />
