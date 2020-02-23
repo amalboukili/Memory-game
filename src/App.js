@@ -3,11 +3,11 @@ import './App.css';
 import GuessCount from './components/GuessCount/GuessCount';
 import Card from './components/card/Card';
 import shuffle from 'lodash.shuffle';
-import HallOfFame, { FAKE_HOF } from './components/hallOfFame/HallOfFame';
+import HallOfFame from './components/hallOfFame/HallOfFame';
 import HighScoreInput from './components/highScore/HighScoreInput';
 
 const SIDE = 6;
-const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿';
+export const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿';
 const VISUAL_PAUSE_MSECS = 750;
 export class App extends Component {
   state = {
